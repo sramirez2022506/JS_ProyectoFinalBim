@@ -105,4 +105,19 @@ export const deleteUser = async (req, res) =>{
             msg: "Error in the server"
         });
     }
-}; 
+};
+
+export const getUser = async (req, res = response) =>{
+    const {limit, from} = req.query;
+    const query = {status: true};
+
+    const [total, user] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query).skip(Number(from)).limit(Number(limit))
+    ]);
+
+    res.status(200).json({
+        total,
+        user
+    });
+};
