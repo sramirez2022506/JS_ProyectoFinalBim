@@ -16,9 +16,19 @@ export const existEmail = async (email = '')=>{
     }
 }
 
+export const emailValid = async (email = "") =>{
+    const emailValid = await User.findOne({email});
+    return !!emailValid
+};
+
 export const existUserById = async (id= '') =>{
-    const existsUser = await User.findById(id);
-    if(!existsUser){
+    const existUser = await User.findById(id);
+    if(!existUser){
         throw new Error(`The id ${id} doesnt exists`);
     }
 }
+
+export const nameValid = async (name = "") =>{
+    const nameValid = await User.findOne({name});
+    return !!nameValid; 
+};
