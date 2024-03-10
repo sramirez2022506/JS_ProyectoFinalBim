@@ -1,7 +1,7 @@
 import { config } from "dotenv";
-config();
 import Server from "./config/server.js";
+config();
 
-const Server = new Server();
+const server = new Server();
 
-Server.listen();
+server.listen();

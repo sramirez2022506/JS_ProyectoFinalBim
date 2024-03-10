@@ -9,7 +9,7 @@ router.post(
     "/login",
     [
         check("email", "This email is not valid").isEmail(),
-        checkk("password", "The password is obligatory").not().isEmpty(),
+        check("password", "The password is obligatory").not().isEmpty(),
         validateFields,
     ],
     login

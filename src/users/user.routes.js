@@ -3,7 +3,7 @@ import {check} from "express-validator";
 import {
     existEmail,
     existUserById,
-    existName
+    existUser
 } from "../helpers/db-validator.js";
 import {validateJWT} from "../middlewares/validate-jwt.js";
 import {
@@ -17,9 +17,7 @@ import{
     //deleteUserAccout
     deleteUser,
     getUser,
-    register,
-    updateUser,
-    updateRoleUser
+    register
 } from "../users/user.controller.js";
 
 
@@ -31,9 +29,9 @@ router.post(
     "/register",
     [
         check("name", "The name cannot be empty").not().isEmpty(),
-        check("name").custom(existName),
+        check("name").custom(existUser),
         check("email", "The email cannont be empty").not().isEmpty(),
-        check("email").custom(existEmial),
+        check("email").custom(existEmail),
         check("password", "The password cannot be empty").not().isEmpty(),
         validateFields
     ],
@@ -76,3 +74,6 @@ router.delete(
     ],
     deleteUser
 );
+
+
+export default router;

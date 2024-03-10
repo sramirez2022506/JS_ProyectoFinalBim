@@ -1,13 +1,4 @@
-import Role from "../role/role.model.js";
-import User from "../user/user.model.js";
-
-export const validRole = async (role = '') =>{
-    const existRole = await Role.findOne({role});
-
-    if(!existRole){
-        throw new Error(`The role ${role} doesnt exists in the database`);
-    }
-}
+import User from "../users/user.model.js";
 
 export const existEmail = async (email = '')=>{
     const existEmail = await User.findOne({email});
@@ -19,6 +10,13 @@ export const existEmail = async (email = '')=>{
 export const emailValid = async (email = "") =>{
     const emailValid = await User.findOne({email});
     return !!emailValid
+};
+
+export const existUser = async (name = "") =>{
+    const existUser = await User.finOne({name});
+    if(existUser){
+        throw new Error(`The user ${name} alredy exists`);
+    }
 };
 
 export const existUserById = async (id= '') =>{
