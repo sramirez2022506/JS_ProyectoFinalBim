@@ -26,7 +26,22 @@ const UserSchema = mongoose.Schema({
     state: {
         type: Boolean, 
         default: true
-    }
+    },
+
+    /*history: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Bill",
+        },
+    ],
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now
+    }*/
 });
 
 UserSchema.methods.toJSON = function (){
