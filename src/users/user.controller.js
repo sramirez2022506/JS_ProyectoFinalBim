@@ -48,6 +48,8 @@ export const updateUser = async (req, res) =>{
             const hashPassword = await bcryptjs.hash(rest.password, 9);
             update.password = hashPassword;
         }
+        update.update_at = new Date();
+
         const updateUser = await User.findByIdAndUpdate(userId, update, {
             new: true
         });
@@ -66,16 +68,6 @@ export const updateUser = async (req, res) =>{
             });
         }
     };
-
-    await User.findByIdAndUpdate(id, rest);
-
-    const user = await User.findOne({_id: id});
-
-    res.status(200).json({
-        msg: "User updated",
-        user
-    });
-}
 
 export const updateRoleUser = async (req, res) =>{
     const {id} = req.params;
@@ -100,13 +92,17 @@ export const updateRoleUser = async (req, res) =>{
 
 export const deleteUser = async (req, res) =>{
     const {id} = req.params;
-
-    const user = await User.finnByIdAndUpdate(id, {state: false});
-    const authenticatedUser = req.user;
-
-    res.status(200).json({
-        msg: "User off",
-        user,
-        authenticatedUser
-    });
-} 
+    try{
+        const existUser = await User.findById(userId);
+        existUser.status = false;
+        await existUser.save();
+        res.json({
+            msg: "The user was deleted succesfully"
+        });
+    }catch(e){
+        console.log(e);
+        res.status(500).json({
+            msg: "Error in the server"
+        });
+    }
+}; 
