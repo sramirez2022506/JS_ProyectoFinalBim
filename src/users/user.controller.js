@@ -121,3 +121,51 @@ export const getUser = async (req, res = response) =>{
         user
     });
 };
+
+export const UpdateClient = async (req, res) =>{
+    const userId = req.user.id;
+    const {...rest} = req.body;
+
+    try{
+        let update = {};
+        if (rest.nameClient) update.nameClient = rest.nameClient;
+        if (rest.address) update.address = rest.address;
+        if (rest.birth) update.birth = rest.birth;
+        if (rest.phone) update.phone = rest.phone;
+        update.updated_at = new Date();
+
+        const updateUser = await User.findByIdAndUpdate(userId, update, {
+            new: true
+        });
+        res.status(200).json({
+            msg: "Information was updated succesfully",
+            user: updateUser
+        });
+    }catch(e){
+        console.log(e);
+        res.status(500).json({
+            msg: "Error in the server"
+        });
+    }
+};
+
+export const deleteUserClient = async (req, res) =>{
+    const userId = req.user.id;
+    try{
+        const updateUser = await User.findByIdAndUpdate(
+            userId,
+            {status:false},
+            {new:true}
+        );
+
+        res.status(200).json({
+            msg: "Account succesfully deleted",
+            user:updateUser
+        });
+    }catch(e){
+        console.log(e);
+        res.status(500).json({
+            msg: "Error in the server"
+        })
+    }
+}
