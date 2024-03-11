@@ -2,11 +2,11 @@ import bcryptjs from "bcryptjs";
 import { generateJWT } from "../helpers/generate-jwt.js";
 
 export const login = async (req, res) => {
-    const { userOrEmail, password } = req.body;
+    const { name, password } = req.body;
 
     try {
         const user = await UserActivation.findOne({
-            $or: [{ email: userOrEmail }, { username: userOrEmail }]
+            $or: [{ email: name }, { user: name }]
         });
 
         if (!user) {
