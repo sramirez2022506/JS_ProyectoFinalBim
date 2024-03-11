@@ -93,7 +93,7 @@ export const updateRoleUser = async (req, res) =>{
 export const deleteUser = async (req, res) =>{
     const {id} = req.params;
     try{
-        const existUser = await User.findById(userId);
+        const existUser = await User.findById({id});
         existUser.status = false;
         await existUser.save();
         res.json({
@@ -168,4 +168,4 @@ export const deleteUserClient = async (req, res) =>{
             msg: "Error in the server"
         })
     }
-}
+};
