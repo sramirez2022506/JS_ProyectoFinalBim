@@ -13,8 +13,8 @@ import {
 import { updateRoleUser, updateUser } from "./user.controller.js";
 import {hasRole} from "../middlewares/validate-role.js";
 import{
-    //UpdateClientInfo
-    //deleteUserAccout
+    UpdateClient,
+    deleteUserClient,
     deleteUser,
     getUser,
     register
@@ -75,5 +75,22 @@ router.delete(
     deleteUser
 );
 
+router.put(
+    "/profile-config",
+    validateJWT,
+    [
+        validateFields
+    ],
+    UpdateClient
+);
+
+router.delete(
+    "/profile-config",
+    validateJWT,
+    [
+        confirmAction
+    ],
+    deleteUserClient
+);
 
 export default router;

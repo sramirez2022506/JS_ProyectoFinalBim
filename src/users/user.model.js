@@ -44,12 +44,13 @@ const UserSchema = mongoose.Schema({
         type: String
     },
 
-    history: [
+    /*history: [
         {
             type: Schema.Types.ObjectId,
             ref: "Bill",
         },
-    ],
+    ],*/
+    
     created_at: {
         type: Date,
         default: Date.now,
