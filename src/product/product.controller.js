@@ -1,4 +1,5 @@
 import Product from "./product.model.js";
+import Bill from "../bills/bill.model.js";
 
 export const getProduct = async (req, res = response) =>{
     const {limit, from} = req.query;
